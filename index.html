@@ -2,10 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Chat with JSON!</title>
+    <title>Speak your mind</title>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/styles.css">
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="css/styles.css">
     <script src="vendor/jquery/jquery-1.9.1.js"></script>
     <script src="js/setup.js"></script>
   </head>
@@ -21,24 +21,32 @@
         <div class='span2'>
           <ul class='nav nav-list'>
             <li class='nav-header'>Rooms</li>
-            <li><a href="#">Rock room</a></li>
-            <li class='active'><a href="#">Rad room</a></li>
+            <li class='active'><a href="#">Default</a></li>
             <li><a href="#">Sad room :(</a></li>
           </ul>
+          <button class="btn addRoomBtn">Add Room</button>
+          <input type="text" class="roomNameEnterer" placeholder="Room name...">
+          <button class="btn btn-link submitNewRoom">Make room</button>
+
         </div>
         <div class='span10'>
-          <div class='container-fluid msgHolder' style='border: 1px solid black;'>
+          <div class='container-fluid msgHolder'>
             <div class='well'>
               <p class="text-left lead">Sam</p>
               <p class="text-right">Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I'm in a transitional period so I don't wanna kill you, I wanna help you. But I can't give you this case, it don't belong to me. </p>
             </div> 
           </div>
-          <form class="form-search">
+          <div class="form-search">
             <div class="input-append">
-              <input type="text" class="span12 search-query">
-              <button type="submit" class="btn">Send Message</button>
+              <div class='usernameBox'>
+                <input type="text" class="userName" placeholder="Enter your username...">
+              </div>
+              <div class="messageBox">
+                <input type="text" class="span12 search-query tallForm" size="30" style="height: 50px;">
+                <button type="submit" class="btn msgSend">Send Message</button>
+              </div>
             </div>
-          </form>           
+          </div>           
         </div>
       </div>    
     </div>
