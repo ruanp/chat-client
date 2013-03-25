@@ -1,30 +1,15 @@
-if(!/(&|\?)username=/.test(window.location.search)){
-  var newSearch = window.location.search;
-  if(newSearch !== '' & newSearch !== '?'){
-    newSearch += '&';
-  }
-  var ourUserName = (prompt('What is your name?') || 'anonymous');
-  newSearch += 'username=' + ourUserName;
-  window.location.search = newSearch;
-}
-
 // Don't worry about this code, it will ensure that your ajax calls are allowed by the browser
 $.ajaxPrefilter(function(settings, _, jqXHR) {
   jqXHR.setRequestHeader("X-Parse-Application-Id", "voLazbq9nXuZuos9hsmprUz7JwM2N0asnPnUcI7r");
   jqXHR.setRequestHeader("X-Parse-REST-API-Key", "QC2F43aSAghM97XidJw8Qiy1NXlpL5LR45rhAVAf");
 });
 
-var ourUserData = {
-  "username" : ourUserName,
-  "text" : "hello World"
-};
-
 var lastDate;
 var rooms = ['Default'];
 var thisRoom = 'Default';
 
 var getMessages = function(array) {
-  var userObj = [];
+  var result = [];
   for (var i = 0; i<array.length; i++){
     var thisMessage = {};
     thisMessage.msg = array[i].text;
@@ -33,9 +18,9 @@ var getMessages = function(array) {
     } else {
       thisMessage.username = 'Anonymous';
     } 
-    userObj.push(thisMessage);
+    result.push(thisMessage);
   }
-  return userObj;
+  return result;
 };
 
 var switchRoom = function($roomItem) {
@@ -59,8 +44,8 @@ var makeMessageDiv = function(obj) {
   return $messageDiv;
 };
 
-var appendToMessages = function(div) {
-  $('.msgHolder').append(div);
+var appendToMessages = function($div) {
+  $('.msgHolder').prepend($div);
 };
 
 var getter = function(date) {
@@ -71,24 +56,8 @@ var getter = function(date) {
       contentType: "application/json"
   };
   
-  var where = {}
-
-  where.updatedAt = 
-
-  var where = {
-    "updatedAt": {
-      "$gt": {{"__type":"Date","iso":"' + date + '"}}
-    },
-    "roomname": thisRoom
-  }
-
-
   if (arguments.length > 0){
     getParams.data = 'where={"updatedAt":{"$gt":{"__type":"Date","iso":"' + date + '"}}}';
-  }
-  if (arguments.length > 0 && thisRoom != 'Default') {
-    getParams.data = 'where={"roomname": "' + thisRoom + '"}';
-
   }
 
   $.ajax(getParams).done(function(response){
@@ -149,7 +118,6 @@ $('.submitNewRoom').hide();
       console.log(newFriend);
       if (newFriend === $(this).children('.text-right.lead').text()) {
         $(this).children('.text-left').toggleClass('friendMessage');
-        // $(this).children('.text-right.lead').prepend('<span class="label label-info friendLabel">friend</span>');
       }
     });
   }));
